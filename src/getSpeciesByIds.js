@@ -1,7 +1,11 @@
 const data = require('../data/zoo_data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+// const { species } = data;
+
+// console.log(data);
+
+function getSpeciesByIds(...rest) {
+  return data.species.filter((value) => rest.includes(value.id));
 }
 
 module.exports = getSpeciesByIds;
