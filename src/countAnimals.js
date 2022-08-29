@@ -37,5 +37,4 @@ function countAnimals(animal) {
   return animalsPorSex(animal);
 }
 
-console.log(countAnimals({ specie: 'giraffes' }));
 module.exports = countAnimals;
