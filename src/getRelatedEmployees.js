@@ -10,9 +10,9 @@ function isManager(id) {
 
 function getRelatedEmployees(managerId) {
   if (isManager(managerId) === true) {
-    const colabs = data.employees.filter((pessoa) => pessoa.managers.includes(managerId));
+    const colabsFilter = data.employees.filter((pessoa) => pessoa.managers.includes(managerId));
     const subordinados = [];
-    colabs.forEach((pessoa) => subordinados.push(`${pessoa.firstName} ${pessoa.lastName}`));
+    colabsFilter.forEach((pessoa) => subordinados.push(`${pessoa.firstName} ${pessoa.lastName}`));
     return subordinados;
   }
   throw new Error('O id inserido não é de uma pessoa colaboradora gerente!');
