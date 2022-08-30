@@ -1,12 +1,8 @@
 const data = require('../data/zoo_data');
 
 const entrants = [
-  { name: 'Lara Carvalho', age: 5 },
-  { name: 'Frederico Moreira', age: 5 },
-  { name: 'Pedro Henrique Carvalho', age: 5 },
   { name: 'Maria Costa', age: 18 },
   { name: 'Núbia Souza', age: 18 },
-  { name: 'Carlos Nogueira', age: 50 },
 ];
 
 function countEntrants(visitantes) {
@@ -26,9 +22,10 @@ function countEntrants(visitantes) {
 }
 
 const totalVisitantes = (visitante) => {
-  let totalPessoas = Object.values(visitante);
-  totalPessoas = (totalPessoas[0] * 20.99) + (totalPessoas[1] * 49.99) + (totalPessoas[2] * 24.99);
-  return totalPessoas;
+  let totalPorIdade = Object.values(visitante);
+  totalPorIdade = (totalPorIdade[0] * data.prices.child)
+  + (totalPorIdade[1] * data.prices.adult) + (totalPorIdade[2] * data.prices.senior);
+  return totalPorIdade;
 };
 
 const calculateEntry = (visitantes) => {
