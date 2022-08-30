@@ -22,4 +22,22 @@ describe('Testes da função getOpeningHours', () => {
     expect(getOpeningHours('tuesday', '09:00-AM')).toBe('The zoo is open');
     expect(getOpeningHours('TUESDAY', '01:00-AM')).toBe('The zoo is closed');
   });
+  it('Ao receber o paramentro errado deve lançar uma exceção com a mensagem de erro', () => {
+    expect(() => getOpeningHours('Thu', '09:00-AM')).toThrowError(new Error('The day must be valid. Example: Monday'));
+  });
+  it('Ao receber o paramentro errado deve lançar uma exceção com a mensagem de erro 2', () => {
+    expect(() => getOpeningHours('Friday', '09:00-ZM')).toThrowError(new Error('The abbreviation must be \'AM\' or \'PM\''));
+  });
+  it('Ao receber o paramentro errado deve lançar uma exceção com a mensagem de erro 3', () => {
+    expect(() => getOpeningHours('Saturday', 'C9:00-AM')).toThrowError(new Error('The hour should represent a number'));
+  });
+  it('Ao receber o paramentro errado deve lançar uma exceção com a mensagem de erro 4', () => {
+    expect(() => getOpeningHours('Sunday', '09:c0-AM')).toThrowError(new Error('The minutes should represent a number'));
+  });
+  it('Ao receber o paramentro de hora com minutos acima de 60 deve lançar uma exceção com a mensagem de erro 5', () => {
+    expect(() => getOpeningHours('Sunday', '09:80-AM')).toThrowError(new Error('The minutes must be between 0 and 59'));
+  });
+  it('Ao receber o paramentro de hora modelo 24h deve lançar uma exceção com a mensagem de erro 6', () => {
+    expect(() => getOpeningHours('Sunday', '14:00-AM')).toThrowError(new Error('The hour must be between 0 and 12'));
+  });
 });
