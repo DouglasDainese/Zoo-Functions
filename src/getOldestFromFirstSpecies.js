@@ -14,6 +14,6 @@ function getOldestFromFirstSpecies(id) {
   return animalMaisVelho;
 }
 
-console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = getOldestFromFirstSpecies;
