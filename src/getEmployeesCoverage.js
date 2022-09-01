@@ -1,20 +1,13 @@
 const data = require('../data/zoo_data');
 
-// {
-//   "id":  "c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1",
-//   "fullName":  "Nigel Nelson",
-//   "species": [ "lions", "tigers" ],
-//   "locations": [ "NE", "NW" ],
-// },
-
-const getAllColab = (param) => data.employees.map((colab) => ({
+const returnGeneration = (colab) => ({
   id: colab.id,
   fullName: `${colab.firstName} ${colab.lastName}`,
   species: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
     .map((name) => name.name),
   locations: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
     .map((localização) => localização.location),
-}));
+});
 
 const getColabByName = (param) => {
   if (!data.employees.some((colaboradores) => colaboradores.firstName
@@ -24,14 +17,7 @@ const getColabByName = (param) => {
   }
   const colab = data.employees.find((valor) => param.name
     .includes(valor.firstName) || param.name.includes(valor.lastName));
-  return {
-    id: colab.id,
-    fullName: `${colab.firstName} ${colab.lastName}`,
-    species: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
-      .map((name) => name.name),
-    locations: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
-      .map((localização) => localização.location),
-  };
+  return returnGeneration(colab);
 };
 
 const getColabById = (param) => {
@@ -40,23 +26,16 @@ const getColabById = (param) => {
     throw new Error('Informações inválidas');
   }
   const colab = data.employees.find((valor) => param.id.includes(valor.id));
-  return {
-    id: colab.id,
-    fullName: `${colab.firstName} ${colab.lastName}`,
-    species: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
-      .map((name) => name.name),
-    locations: data.species.filter((animais) => colab.responsibleFor.includes(animais.id))
-      .map((localização) => localização.location),
-  };
+  return returnGeneration(colab);
 };
 
 function getEmployeesCoverage(param) {
-  if (param === undefined) return getAllColab(param);
+  if (param === undefined) return data.employees.map((colab) => returnGeneration(colab));
   const parametro = Object.keys(param);
   if (parametro[0] === 'name') return getColabByName(param);
   if (parametro[0] === 'id') return getColabById(param);
 }
 
-console.log(getEmployeesCoverage({ name: 'Strauss' }));
+console.log(getEmployeesCoverage());
 
 module.exports = getEmployeesCoverage;
